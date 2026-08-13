@@ -85,6 +85,9 @@ Example:
 <pre><code>string encoded = 0L.ToBase62(); Console.WriteLine(encoded); // 0</code></pre>
 
 <details> <summary>➕ API Reference</summary>
+ 
+API Reference
+-------------
 
 Encoding
 ToBase62
@@ -179,6 +182,7 @@ If all characters are valid, the method returns null.
 <details> <summary>➕ Error Handling</summary>
 
 Detailed Error Handling
+-----------------------
 The library provides a Base62Error type for callers who need more information than a simple true / false result.
 
 For example:
@@ -235,6 +239,7 @@ This allows the caller to inspect the error without using exceptions for normal 
 <details> <summary>➕ Base62 Alphabet</summary>
 
 Base62 Alphabet
+---------------
 This implementation uses the following fixed alphabet:
 
 <pre><code>0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</code></pre>
@@ -284,6 +289,9 @@ If the alphabet is changed incorrectly (for example: accidentally changed by the
 
 <details> <summary>➕ Number Handling</summary>
 
+Number Handling
+---------------
+
 Zero
 Zero is represented by the first character of the alphabet:
 
@@ -330,6 +338,7 @@ The additional sign characters are treated as invalid Base62 digits.
 <details> <summary>➕ long.MinValue Limitation</summary>
 
 long.MinValue Limitation
+------------------------
 The current implementation intentionally does not support:
 
 <pre><code>long.MinValue</code></pre>
@@ -355,6 +364,8 @@ This behavior is explicit and documented rather than relying on an overflow or u
 <details> <summary>➕ Overflow Protection</summary>
 
 Overflow Protection
+--------------------
+
 During decoding, arithmetic is performed using checked operations:
 
 <pre><code>number = checked(number * BASE + charIndex);</code></pre>
@@ -372,6 +383,7 @@ The output value is reset to 0 when decoding fails because of an invalid digit o
 <details> <summary>➕ Example: Round Trip</summary>
 
 Encode → Decode Round Trip
+--------------------------
 A typical encode/decode round trip looks like this:
 
 <pre><code>long original = -987654321; string encoded = original.ToBase62(); long decoded = encoded.FromBase62ToLong(); Console.WriteLine($"Original: {original}"); Console.WriteLine($"Encoded : {encoded}"); Console.WriteLine($"Decoded : {decoded}");</code></pre>
@@ -432,6 +444,7 @@ The primary encoding and decoding methods are exposed as extension methods where
 <details> <summary>➕ Why Base62?</summary>
 
 Why Base62?
+-----------
 
 Base62 is useful when a compact, human-readable representation of an integer is needed.
 
@@ -454,6 +467,14 @@ Common use cases include:
 Base62 encoding is not encryption. The encoded value can be decoded back to the original integer. Therefore, Base62 should not be used to protect confidential information.</b>
 
 If the encoded value is exposed publicly and the underlying integer has sensitive meaning, consider an appropriate cryptographic or authorization mechanism instead.
+
+</details>
+
+<details> <summary>➕ Naming Convention</summary>
+
+Naming Convention in Source Code
+------------
+Although PascalCase is the conventional style for constants in C#, this project intentionally uses UPPER_SNAKE_CASE, inspired by C/C++ conventions. The goal is to make constants immediately recognizable when reading code, particularly when the library is integrated into larger codebases.
 
 </details>
 
