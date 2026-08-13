@@ -403,41 +403,39 @@ for all supported long values.
 
 Design Notes
 ------------
-Fixed Alphabet
+
+<b>Fixed Alphabet</b>
 
 The alphabet is private and intentionally non-configurable.
 
 This guarantees consistent encoding and decoding behavior.
 
-Defensive Alphabet Validation
+<b>Defensive Alphabet Validation</b>
+
 Although the alphabet is a compile-time constant, the implementation validates it during static initialization.
 
 The validation checks:
 
-Exact alphabet length.
-
-Character uniqueness.
-
-Allowed character ranges.
+* Exact alphabet length.
+* Character uniqueness.
+* Allowed character ranges.
 
 This protects the encoding and decoding behavior from accidental future changes.
 
-Separate Validation and Decoding
+<b>Separate Validation and Decoding</b>
+
 The implementation separates input validation from the actual Base62 conversion.
 
 This makes it possible to:
 
-Validate input independently.
+* Validate input independently
+* Return detailed error information
+* Use exception-based APIs
+* Use non-exception-based APIs
+* Keep the decoding algorithm focused on numeric conversion.
 
-Return detailed error information.
+<b>Extension Methods</b>
 
-Use exception-based APIs.
-
-Use non-exception-based APIs.
-
-Keep the decoding algorithm focused on numeric conversion.
-
-Extension Methods
 The primary encoding and decoding methods are exposed as extension methods where appropriate, allowing concise syntax such as:
 
 <pre><code>long value = "8m0Kx".FromBase62ToLong(); string encoded = value.ToBase62();</code></pre>
