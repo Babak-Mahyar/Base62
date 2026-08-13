@@ -1,4 +1,4 @@
-<b>Base62 Encoder for .NET 8.0 or above</b>
+<b>Base62 Encoder for .NET 8.0 or higher</b>
 ---------
 A lightweight C# utility for encoding signed 64-bit integers (long) into compact, URL-safe Base62 strings and decoding Base62 strings back into long values.
 
