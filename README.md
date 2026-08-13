@@ -30,9 +30,9 @@ Features
 
 * Two error-handling styles:
 
-* Exception-based API
+  * Exception-based API
 
-* Base62Error / Try... API
+  * Base62Error / Try... API
 
 * Detection of invalid Base62 characters.
 
