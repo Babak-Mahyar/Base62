@@ -257,15 +257,15 @@ Each character represents a value from 0 to 61.
 Alphabet Composition
 The alphabet contains:
 
-10 digits: 0-9
+* 10 digits: 0-9
 
-26 lowercase letters: a-z
+* 26 lowercase letters: a-z
 
-26 uppercase letters: A-Z
+* 26 uppercase letters: A-Z
 
 Total:
 
-62 unique characters
+  62 unique characters
 
 Fixed Alphabet
 The alphabet is intentionally fixed and not configurable:
@@ -279,11 +279,11 @@ Although the alphabet is a constant, the implementation validates it during stat
 
 The validation checks:
 
-Exact alphabet length (62)
+* Exact alphabet length (62)
 
-Character uniqueness
+* Character uniqueness
 
-Allowed character ranges
+* Allowed character ranges
 
 This acts as a defensive invariant check against future source-code modifications.
 
