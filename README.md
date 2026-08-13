@@ -491,8 +491,6 @@ Copyright (c) 2026 by 'Babak Mahyar'
 
 You are welcome to use, copy, modify, and include this code in your own projects, including commercial projects.
 
-If you find this project useful, consider giving it a ⭐ on GitHub.
-
 Please keep the original copyright notice and give appropriate credit to the original author when redistributing or publishing substantial portions of the code.
 
 This software is provided "as is", without warranty of any kind. The author is not responsible for any damage, loss, or other consequences resulting from the use of this software.
