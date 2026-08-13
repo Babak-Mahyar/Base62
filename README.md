@@ -195,16 +195,13 @@ For example:
 
 Each error has:
 
-Code
-
-Message
-
-IsOK
-
-HasError
+* Code
+* Message
+* IsOK
+* HasError
 
 <b>Supported Error Codes</b>
------------
+----------------------------
 
 | Value | Error Code                                      | Description                                                             |
 | ----- | -----------                                     | -----------                                                             |
@@ -219,7 +216,8 @@ HasError
 |   8   | LongMinValueIsNotSupported                      | long.MinValue cannot be encoded by this implementation                  |
 |   9   | NegativeSignIsNotAllowedForPositiveBase62Number | A negative sign was supplied to the positive-number decoding method     |
 
-<b>Exception-Based API</b>
+Exception-Based API
+--------------------------
 
 The simplest API throws an exception when the input cannot be processed.
 
@@ -232,6 +230,7 @@ For encoding:
 The Base62Error.ThrowException() method maps specific errors to appropriate exception types.
 
 Non-Exception-Based API
+-----------------------
 For applications that prefer explicit error handling, the out Base62Error overloads can be used instead.
 
 <pre><code>long number = Base62Encoder.FromBase62ToLong( input, out Base62Encoder.Base62Error error); if (error.IsOK) { Console.WriteLine(number); } else { Console.WriteLine(error.Message); }</code></pre>
