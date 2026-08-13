@@ -9,37 +9,41 @@ The library uses a fixed 62-character alphabet:
 If you find this project useful, consider giving it a ⭐ on GitHub.
 
 Features
-Encode signed 64-bit integers (long) to Base62.
+--------
 
-Decode Base62 strings back to long.
+* Encode signed 64-bit integers (long) to Base62.
 
-Support for negative numbers using a leading - sign.
+* Decode Base62 strings back to long.
 
-URL-safe alphabet containing only:
+* Support for negative numbers using a leading - sign.
 
-0-9
+* URL-safe alphabet containing only:
 
-a-z
+   0-9
+  
+   a-z
+  
+   A-Z
+  
 
-A-Z
+* Input validation with detailed error codes.
 
-Input validation with detailed error codes.
+* Two error-handling styles:
 
-Two error-handling styles:
+* Exception-based API
 
-Exception-based API
+* Base62Error / Try... API
 
-Base62Error / Try... API
+* Detection of invalid Base62 characters.
 
-Detection of invalid Base62 characters.
+* Overflow detection when decoding.
 
-Overflow detection when decoding.
+* Defensive validation of the internal Base62 alphabet.
 
-Defensive validation of the internal Base62 alphabet.
-
-Extension-method syntax for convenient usage.
+* Extension-method syntax for convenient usage.
 
 Quick Start
+-----------
 Encoding a long
 <details> <summary>➕ Show example</summary>
 
