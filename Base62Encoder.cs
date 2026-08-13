@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Text;
 using static Base62.Base62Encoder.Base62Error;
 
@@ -55,10 +55,19 @@ public static class Base62Encoder
  
         public static readonly Base62Error OK =
             new(ErrorCode.None);
+
+        private const string UNKNOWN_PARAMETER = "?";
+
         protected string GetParameter(int parameterIndex)
         {
+            // If null is used as parameter,
+            // For example: new Base62Error(ErrorCode.InvalidAlphabetCharacter, null)
+
+            if (Parameters == null)
+                return UNKNOWN_PARAMETER;
+
             bool isOutOfRangeIndex = (parameterIndex < 0) || (parameterIndex > Parameters.Length - 1);
-            return isOutOfRangeIndex ? "?" : Parameters[parameterIndex].ToString() ?? "";
+            return isOutOfRangeIndex ? UNKNOWN_PARAMETER : Parameters[parameterIndex].ToString() ?? UNKNOWN_PARAMETER;
         }
         public bool IsOK
         {
