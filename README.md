@@ -94,7 +94,10 @@ API Reference
 -------------
 
 Encoding
-ToBase62
+--------
+
+<b>ToBase62</b>
+
 Encodes a signed 64-bit integer into a Base62 string and throws an exception if encoding fails.
 
 <pre><code>string encoded = 123456789L.ToBase62();</code></pre>
@@ -103,13 +106,17 @@ An overload is also available when detailed error information is required:
 
 <pre><code>string encoded = number.ToBase62(out Base62Encoder.Base62Error error);</code></pre>
 
-TryEncode
+<b>TryEncode</b>
+
 Attempts to encode a long without throwing an exception.
 
 <pre><code>if (Base62Encoder.TryEncode(123456789, out string base62Number)) { Console.WriteLine(base62Number); } else { Console.WriteLine("Encoding failed."); }</code></pre>
 
 Decoding
-FromBase62ToLong
+--------
+
+<b>FromBase62ToLong</b>
+
 Decodes a Base62 string back into a 64-bit integer and throws an exception if decoding fails.
 
 <pre><code>long number = "8m0Kx".FromBase62ToLong();</code></pre>
@@ -118,12 +125,14 @@ An overload returning detailed error information is also available:
 
 <pre><code>long number = Base62Encoder.FromBase62ToLong( "8m0Kx", out Base62Encoder.Base62Error error);</code></pre>
 
-TryDecode
+<b>TryDecode</b>
+
 Attempts to decode a Base62 string without throwing an exception.
 
 <pre><code>if (Base62Encoder.TryDecode("8m0Kx", out long number)) { Console.WriteLine(number); } else { Console.WriteLine("Decoding failed."); }</code></pre>
 
-Positive Base62 Decoding
+<b>Positive Base62 Decoding</b>
+
 The following methods are available when the input is expected to contain only positive Base62 digits.
 
 <pre><code>Base62Encoder.TryDecodePositiveBase62Number( "8m0Kx", out long number);</code></pre>
@@ -137,19 +146,18 @@ A negative sign is explicitly rejected by these methods.
 This makes them useful when the caller wants to separate sign handling from numeric Base62 decoding.
 
 Validation
+----------
+
 Base62 strings can be validated independently.
 
 <pre><code>Base62Encoder.Base62Error error = "8m0Kx".ValidateBase62Number( out string positiveNumber, out bool isNegative); if (error.IsOK) { Console.WriteLine("Valid Base62 number."); }</code></pre>
 
-The validation process:
+<b>The validation process:</b>
 
-Trims surrounding whitespace.
-
-Detects an optional leading + or -.
-
-Ensures at least one significant digit exists.
-
-Checks every character against the Base62 alphabet.
+* Trims surrounding whitespace.
+* Detects an optional leading + or -.
+* Ensures at least one significant digit exists.
+* Checks every character against the Base62 alphabet.
 
 Only a leading sign is treated as a sign.
 
@@ -166,6 +174,8 @@ For example:
 12+345 → invalid
 
 Sign Detection
+--------------
+
 The library also provides a method for detecting the sign of a Base62 number:
 
 <pre><code>Base62Encoder.DetectSignForBase62Number( base62Number, out string positiveBase62Number, out bool isNegative);</code></pre>
@@ -175,6 +185,8 @@ The method separates the optional leading sign from the Base62 digits.
 A leading + or - is treated as a sign. Any sign character appearing later in the string is treated as an invalid Base62 digit during validation.
 
 Invalid Digit Detection
+-----------------------
+
 A helper method is available for locating an invalid Base62 character:
 
 <pre><code>char? invalidDigit = Base62Encoder.GetInvalidDigitForBase62Number( positiveBase62NumberWithoutSign);</code></pre>
@@ -295,7 +307,8 @@ If the alphabet is changed incorrectly (for example: accidentally changed by the
 Number Handling
 ---------------
 
-Zero
+<b>Zero</b>
+
 Zero is represented by the first character of the alphabet:
 
 <pre><code>0</code></pre>
@@ -304,7 +317,8 @@ Example:
 
 <pre><code>string encoded = 0L.ToBase62(); Console.WriteLine(encoded); // 0</code></pre>
 
-Negative Numbers
+<b>Negative Numbers</b>
+
 Negative values are supported.
 
 A negative number is encoded using a leading - sign:
@@ -313,7 +327,8 @@ A negative number is encoded using a leading - sign:
 
 The sign is not part of the Base62 alphabet. It is handled separately from the Base62 digits.
 
-Leading Signs
+<b>Leading Signs</b>
+
 The validation logic supports an optional leading sign.
 
 Examples:
