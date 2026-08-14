@@ -44,21 +44,25 @@ Features
 
 Quick Start
 -----------
-Encoding a long
+
+<b>Encoding a long</b>
+
 <details> <summary>➕ Show example</summary>
 
 <pre><code>using Base62; long number = 123456789; string encoded = number.ToBase62(); Console.WriteLine(encoded);</code></pre>
 
 </details>
 
-Decoding a Base62 string
+<b>Decoding a Base62 string</b>
+
 <details> <summary>➕ Show example</summary>
 
 <pre><code>using Base62; string encoded = "8m0Kx"; long number = encoded.FromBase62ToLong(); Console.WriteLine(number);</code></pre>
 
 </details>
 
-Encoding Negative Numbers
+<b>Encoding Negative Numbers</B>
+
 Negative values are supported.
 
 A negative number is encoded using a leading - sign.
@@ -79,7 +83,8 @@ For example:
 
 represent positive and negative values respectively.
 
-Zero
+<b>Zero</b>
+
 Zero is represented by the first character of the alphabet:
 
 0
