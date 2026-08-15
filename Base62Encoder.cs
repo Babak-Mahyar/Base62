@@ -66,7 +66,7 @@ public static class Base62Encoder
             if (Parameters == null)
                 return UNKNOWN_PARAMETER;
 
-            bool isOutOfRangeIndex = (parameterIndex < 0) || (parameterIndex > Parameters.Length - 1);
+            bool isOutOfRangeIndex = parameterIndex < 0 || parameterIndex >= Parameters.Length;
             return isOutOfRangeIndex ? UNKNOWN_PARAMETER : Parameters[parameterIndex].ToString() ?? UNKNOWN_PARAMETER;
         }
         public bool IsOK
@@ -107,7 +107,13 @@ public static class Base62Encoder
     */
 
     public const bool THROW_EXCEPTION = true;
-    private const string ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    /// <summary>
+    /// The fixed Base62 alphabet used by Base62Encoder.
+    /// The alphabet is not configurable.
+    /// </summary>
+    public const string ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     private static readonly int BASE = ALPHABET.Length;
     private const int EXPECTED_LENGTH = 62;
 
@@ -134,7 +140,10 @@ public static class Base62Encoder
                     (alphabetMember >= 'a' && alphabetMember <= 'z') ||
                     (alphabetMember >= 'A' && alphabetMember <= 'Z')
                     ))
+                {
                     error = new Base62Error(ErrorCode.InvalidAlphabetCharacter, alphabetMember);
+                    break;
+                }
             }
         }
         if (throwException && error.HasError)
