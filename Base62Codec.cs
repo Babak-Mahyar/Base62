@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using System.Text;
-using static Base62.Base62Encoder.Base62Error;
+using static Base62.Base62Codec.Base62Error;
 
 namespace Base62;
 
@@ -10,7 +10,7 @@ namespace Base62;
 /// into long integers.
 /// </summary>
 
-public static class Base62Encoder
+public static class Base62Codec
 {
     public class Base62Error(ErrorCode code, params object[] parameters)
     {
@@ -51,7 +51,7 @@ public static class Base62Encoder
         }
         
         public const string OWNER_CLASS_NAME = 
-            nameof(Base62Encoder);
+            nameof(Base62Codec);
  
         public static readonly Base62Error OK =
             new(ErrorCode.None);
@@ -109,7 +109,7 @@ public static class Base62Encoder
     public const bool THROW_EXCEPTION = true;
 
     /// <summary>
-    /// The fixed Base62 alphabet used by Base62Encoder.
+    /// The fixed Base62 alphabet used by 'Base62Codec' class.
     /// The alphabet is not configurable.
     /// </summary>
     public const string ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -151,7 +151,7 @@ public static class Base62Encoder
         return error;
     }
 
-    static Base62Encoder()
+    static Base62Codec()
     {
         ValidateAlphabet(THROW_EXCEPTION);
     }
