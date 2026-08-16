@@ -109,13 +109,13 @@ Encodes a signed 64-bit integer into a Base62 string and throws an exception if 
 
 An overload is also available when detailed error information is required:
 
-<pre><code>string encoded = number.ToBase62(out Base62Encoder.Base62Error error);</code></pre>
+<pre><code>string encoded = number.ToBase62(out Base62Codec.Base62Error error);</code></pre>
 
 <b>TryEncode</b>
 
 Attempts to encode a long without throwing an exception.
 
-<pre><code>if (Base62Encoder.TryEncode(123456789, out string base62Number)) { Console.WriteLine(base62Number); } else { Console.WriteLine("Encoding failed."); }</code></pre>
+<pre><code>if (Base62Codec.TryEncode(123456789, out string base62Number)) { Console.WriteLine(base62Number); } else { Console.WriteLine("Encoding failed."); }</code></pre>
 
 Decoding
 --------
@@ -128,23 +128,23 @@ Decodes a Base62 string back into a 64-bit integer and throws an exception if de
 
 An overload returning detailed error information is also available:
 
-<pre><code>long number = Base62Encoder.FromBase62ToLong( "8m0Kx", out Base62Encoder.Base62Error error);</code></pre>
+<pre><code>long number = Base62Codec.FromBase62ToLong( "8m0Kx", out Base62Codec.Base62Error error);</code></pre>
 
 <b>TryDecode</b>
 
 Attempts to decode a Base62 string without throwing an exception.
 
-<pre><code>if (Base62Encoder.TryDecode("8m0Kx", out long number)) { Console.WriteLine(number); } else { Console.WriteLine("Decoding failed."); }</code></pre>
+<pre><code>if (Base62Codec.TryDecode("8m0Kx", out long number)) { Console.WriteLine(number); } else { Console.WriteLine("Decoding failed."); }</code></pre>
 
 <b>Positive Base62 Decoding</b>
 
 The following methods are available when the input is expected to contain only positive Base62 digits.
 
-<pre><code>Base62Encoder.TryDecodePositiveBase62Number( "8m0Kx", out long number);</code></pre>
+<pre><code>Base62Codec.TryDecodePositiveBase62Number( "8m0Kx", out long number);</code></pre>
 
 An overload is available when detailed error information is required:
 
-<pre><code>Base62Encoder.TryDecodePositiveBase62Number( "8m0Kx", out long number, out Base62Encoder.Base62Error error);</code></pre>
+<pre><code>Base62Codec.TryDecodePositiveBase62Number( "8m0Kx", out long number, out Base62Codec.Base62Error error);</code></pre>
 
 A negative sign is explicitly rejected by these methods.
 
@@ -155,7 +155,7 @@ Validation
 
 Base62 strings can be validated independently.
 
-<pre><code>Base62Encoder.Base62Error error = "8m0Kx".ValidateBase62Number( out string positiveNumber, out bool isNegative); if (error.IsOK) { Console.WriteLine("Valid Base62 number."); }</code></pre>
+<pre><code>Base62Codec.Base62Error error = "8m0Kx".ValidateBase62Number( out string positiveNumber, out bool isNegative); if (error.IsOK) { Console.WriteLine("Valid Base62 number."); }</code></pre>
 
 <b>The validation process:</b>
 
@@ -183,7 +183,7 @@ Sign Detection
 
 The library also provides a method for detecting the sign of a Base62 number:
 
-<pre><code>Base62Encoder.DetectSignForBase62Number( base62Number, out string positiveBase62Number, out bool isNegative);</code></pre>
+<pre><code>Base62Codec.DetectSignForBase62Number( base62Number, out string positiveBase62Number, out bool isNegative);</code></pre>
 
 The method separates the optional leading sign from the Base62 digits.
 
@@ -194,7 +194,7 @@ Invalid Digit Detection
 
 A helper method is available for locating an invalid Base62 character:
 
-<pre><code>char? invalidDigit = Base62Encoder.GetInvalidDigitForBase62Number( positiveBase62NumberWithoutSign);</code></pre>
+<pre><code>char? invalidDigit = Base62Codec.GetInvalidDigitForBase62Number( positiveBase62NumberWithoutSign);</code></pre>
 
 If all characters are valid, the method returns null.
 
@@ -208,7 +208,7 @@ The library provides a Base62Error type for callers who need more information th
 
 For example:
 
-<pre><code>long number = Base62Encoder.FromBase62ToLong( "invalid@value", out Base62Encoder.Base62Error error); if (error.HasError) { Console.WriteLine(error.Code); Console.WriteLine(error.Message); }</code></pre>
+<pre><code>long number = Base62Codec.FromBase62ToLong( "invalid@value", out Base62Codec.Base62Error error); if (error.HasError) { Console.WriteLine(error.Code); Console.WriteLine(error.Message); }</code></pre>
 
 Each error has:
 
@@ -250,7 +250,7 @@ Non-Exception-Based API
 -----------------------
 For applications that prefer explicit error handling, the out Base62Error overloads can be used instead.
 
-<pre><code>long number = Base62Encoder.FromBase62ToLong( input, out Base62Encoder.Base62Error error); if (error.IsOK) { Console.WriteLine(number); } else { Console.WriteLine(error.Message); }</code></pre>
+<pre><code>long number = Base62Codec.FromBase62ToLong( input, out Base62Codec.Base62Error error); if (error.IsOK) { Console.WriteLine(number); } else { Console.WriteLine(error.Message); }</code></pre>
 
 This allows the caller to inspect the error without using exceptions for normal validation failures.
 
